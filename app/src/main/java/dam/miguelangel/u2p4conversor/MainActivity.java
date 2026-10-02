@@ -1,6 +1,10 @@
 package dam.miguelangel.u2p4conversor;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +24,28 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        setUI();
+    }
+
+    private void setUI(){
+        EditText etPulgada = findViewById(R.id.pedirPulgadas);
+        EditText etResultado = findViewById(R.id.editResultado);
+        Button buttonConvertir = findViewById(R.id.buttonConvertir);
+
+        buttonConvertir.setOnClickListener(v -> {
+            try {
+                etResultado.setText(convertir(etPulgada.getText().toString()));
+            } catch (Exception e) {
+                Log.e("LogsConversor", e.getMessage());
+            }
+        });
+
+    }
+
+    private String convertir(String pulgadaText){
+        double puladaValue = Double.parseDouble(pulgadaText) * 2.54;
+
+        return String.valueOf(puladaValue);
     }
 }
