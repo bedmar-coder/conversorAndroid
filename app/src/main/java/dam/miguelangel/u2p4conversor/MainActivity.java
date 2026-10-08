@@ -43,8 +43,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private String convertir(String pulgadaText){
-        double puladaValue = Double.parseDouble(pulgadaText) * 2.54;
+    private String convertir(String pulgadaText) {
+        //compruebo no sea nulo
+        if (pulgadaText==null){
+            throw new NingunValorException();
+
+        }
+        double doubleValue = Double.parseDouble(pulgadaText);
+       //controlo sea mayor de 0
+        if(doubleValue<1){
+            throw new NumeroMenorException();
+        }
+        double puladaValue = doubleValue * 2.54;
 
         return String.valueOf(puladaValue);
     }
