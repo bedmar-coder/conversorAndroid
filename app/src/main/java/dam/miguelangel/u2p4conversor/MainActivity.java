@@ -2,7 +2,6 @@ package dam.miguelangel.u2p4conversor;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,22 +29,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUI(){
         EditText etPulgada = findViewById(R.id.pedirPulgadas);
-        EditText etResultado = findViewById(R.id.editResultado);
-        Button buttonConvertir = findViewById(R.id.buttonConvertir);
+        EditText etResultadoPulgadas = findViewById(R.id.editResultadoPulgadas);
+        Button buttonConvertirPulgadas = findViewById(R.id.buttonConvertirPulgadas);
 
-        buttonConvertir.setOnClickListener(v -> {
+        //aquí añado mis nuevas cosas añadidas en el layout
+        EditText etCentimetro = findViewById(R.id.pedirCentimetros);
+        EditText etResultadoCentimetros = findViewById(R.id.editResultadoCentimetros);
+        Button buttonConvertirCentietros = findViewById(R.id.buttonConvertirCentimetros);
+
+        buttonConvertirPulgadas.setOnClickListener(v -> {
             try {
-                etResultado.setText(convertir(etPulgada.getText().toString()));
+                etResultadoPulgadas.setText(convertirEnCentimetros(etPulgada.getText().toString()));
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
         });
 
+        //Le doy funcionalidad a mi boton nuevo
+        buttonConvertirCentietros.setOnClickListener(v -> {
+            try {
+                etResultadoCentimetros.setText(convertirEnPulgadas(etCentimetro.getText().toString()));
+            } catch (Exception e){
+                Log.e("LogsConversorCentimetros", e.getMessage());
+            }
+        });
     }
 
-    private String convertir(String pulgadaText){
+    private String convertirEnCentimetros(String pulgadaText){
         double puladaValue = Double.parseDouble(pulgadaText) * 2.54;
 
-        return String.valueOf(puladaValue);
+        return String.format("%.2f",puladaValue);
+    }
+
+    //Mi metodo para pasar de centímetros a pulgadas
+    private String convertirEnPulgadas(String centimetroText){
+        double resultadoValue = Double.parseDouble(centimetroText) / 2.54;
+
+        return String.format("%.2f",resultadoValue);
     }
 }

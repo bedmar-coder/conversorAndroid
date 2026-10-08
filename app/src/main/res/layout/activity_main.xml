@@ -9,6 +9,56 @@
     tools:context=".MainActivity">
 
 
+    <EditText
+        android:id="@+id/editResultadoCentimetros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="548dp"
+        android:ems="10"
+        android:hint="@string/editTextHintResultado"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirPulgadas" />
+
+    <Button
+        android:id="@+id/buttonConvertirCentimetros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="564dp"
+        android:text="@string/buttonConvertir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pedirPulgadas" />
+
+    <EditText
+        android:id="@+id/pedirCentimetros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="568dp"
+        android:ems="10"
+        android:hint="@string/textViewHintPedirCentímetros"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoConversor" />
+
+    <TextView
+        android:id="@+id/infoConversor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textViewInfoCentimetros"
+        android:textColor="#0000FF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/infoConversor"
         android:layout_width="wrap_content"
@@ -16,7 +66,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/textViewInfo"
+        android:text="@string/textViewInfoPulgadas"
         android:textColor="#0000FF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,17 +78,16 @@
         android:id="@+id/pedirPulgadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="@string/textViewHintPedir"
+        android:hint="@string/textViewHintPediPulgadasr"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/infoConversor" />
 
-
     <Button
-        android:id="@+id/buttonConvertir"
+        android:id="@+id/buttonConvertirPulgadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -49,7 +98,7 @@
 
 
     <EditText
-        android:id="@+id/editResultado"
+        android:id="@+id/editResultadoPulgadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -58,6 +107,6 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonConvertir" />
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirPulgadas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
