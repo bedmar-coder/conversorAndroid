@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,14 +29,26 @@ public class MainActivity extends AppCompatActivity {
         setUI();
     }
 
+
     private void setUI(){
         EditText etPulgada = findViewById(R.id.pedirPulgadas);
         EditText etResultado = findViewById(R.id.editResultado);
         Button buttonConvertir = findViewById(R.id.buttonConvertir);
 
+        //añadimos el error para mostrar
+        TextView errText = findViewById(R.id.errorInfo);
+
         buttonConvertir.setOnClickListener(v -> {
             try {
                 etResultado.setText(convertir(etPulgada.getText().toString()));
+                //lo ponemos sin visibilidad por si limpiamos el error
+                errText.setVisibility(View.GONE);
+            } catch (NumeroMenorException | NingunValorException e) {
+                //añadimos el texto al error
+                errText.setText(e.getMessage());
+                //y lo hacemos visible
+                errText.setVisibility(View.VISIBLE);
+                Log.e("LogsCOnversor", e.getMessage());
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
@@ -44,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String convertir(String pulgadaText) {
-        //compruebo no sea nulo
-        if (pulgadaText==null){
+        //compruebo no esté vacia
+        if (pulgadaText.isEmpty()){
             throw new NingunValorException();
 
         }
