@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">U2P4Conversor</string>
-    <string name="textViewInfo">Conversor de pulgadas a centímetros</string>
-    <string name="textViewHintPedir">Introduce las pulgadas</string>
+    <string name="textViewInfoPg">Conversor de pulgadas a centímetros</string>
+    <string name="textViewInfoM">Conversor de centímetros a metros</string>
+    <string name="textViewInfoY">Conversor de yardas a metros</string>
+    <string name="textViewHintPedirPg">Introduce las pulgadas</string>
+    <string name="textViewHintPedirCm">Introduce los centímetros</string>
+    <string name="textViewHintPedirM">Introduce los metros</string>
+    <string name="textViewHintPedirY">Introduce los yardas</string>
     <string name="buttonConvertir">Convertir</string>
+    <string name="buttonInvertir">Invertir</string>
     <string name="editTextHintResultado">Resultado</string>
 </resources>
