@@ -2,21 +2,21 @@ package dam.miguelangel.u2p4conversor;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.StringDef;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-private static boolean PULGADA = true;
-private static boolean CENTIMETRO = true;
-private static boolean YARDA = true;
+
+    //creo estas variables de instancia para controlar los inversores
+private boolean pulgada = true;
+private boolean centimetro = true;
+private boolean yarda = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,8 @@ private static boolean YARDA = true;
 
         //añado listener para los botones de inversión
         buttonInversor.setOnClickListener(v -> {
-            PULGADA = !PULGADA;
-            if (PULGADA){
+            pulgada = !pulgada;
+            if (pulgada){
                 //cambio el texto por lo nuevo que pido
                 etPulgada.setText(v.getContext().getString(R.string.textViewHintPedirPg));
             } else {
@@ -61,8 +61,8 @@ private static boolean YARDA = true;
         });
 
         buttonInversorMetros.setOnClickListener(v -> {
-            CENTIMETRO = !CENTIMETRO;
-            if (CENTIMETRO){
+            centimetro = !centimetro;
+            if (centimetro){
                 etMetro.setText(v.getContext().getString(R.string.textViewHintPedirCm));
             } else {
                 etMetro.setText(v.getContext().getString(R.string.textViewHintPedirM));
@@ -70,8 +70,8 @@ private static boolean YARDA = true;
         });
 
         buttonINversorYarda.setOnClickListener(v -> {
-            YARDA = !YARDA;
-            if (YARDA){
+            yarda = !yarda;
+            if (yarda){
                 etYarda.setText(v.getContext().getString(R.string.textViewHintPedirY));
             } else {
                 etYarda.setText(v.getContext().getString(R.string.textViewHintPedirM));
@@ -80,8 +80,10 @@ private static boolean YARDA = true;
 
         buttonConvertir.setOnClickListener(v -> {
             try {
-                etResultado.setText(pulgadasACentimetros(etPulgada.getText().toString(), PULGADA));
+                etResultado.setText(pulgadasACentimetros(etPulgada.getText().toString(), pulgada));
 
+            } catch (NingunValorException | NumeroMenorException e){
+                Log.e("LogsConversor", e.getMessage());
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
@@ -90,7 +92,9 @@ private static boolean YARDA = true;
         //añado los nuevos botones de convertir
         buttonConvertirMetros.setOnClickListener(v -> {
            try {
-               etResultadoMetros.setText(centimetrosAMetros(etMetro.getText().toString(), CENTIMETRO));
+               etResultadoMetros.setText(centimetrosAMetros(etMetro.getText().toString(), centimetro));
+           } catch (NingunValorException | NumeroMenorException e){
+               Log.e("LogsConversor", e.getMessage());
            } catch (Exception e) {
                Log.e("LogsConversor", e.getMessage());
            }
@@ -98,7 +102,9 @@ private static boolean YARDA = true;
 
         buttonConvertirYarda.setOnClickListener(v -> {
             try {
-                etResultadoYarda.setText(yardasAMetros(etYarda.getText().toString(), YARDA));
+                etResultadoYarda.setText(yardasAMetros(etYarda.getText().toString(), yarda));
+            } catch (NingunValorException | NumeroMenorException e){
+                Log.e("LogsConversor", e.getMessage());
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
@@ -106,7 +112,16 @@ private static boolean YARDA = true;
     }
 
     private String pulgadasACentimetros(String pulgadaText, Boolean inversor){
+        //si el valor está vacio lanzo mi excepción
+        if (pulgadaText.isEmpty()){
+            throw new NingunValorException();
+        }
         double puladaValue;
+
+        //ahora compruebo el número sea igual o mayor a 1
+        if (Double.parseDouble(pulgadaText)<1){
+            throw new NumeroMenorException();
+        }
         if (inversor){
             puladaValue = Double.parseDouble(pulgadaText) * 2.54;
             return String.valueOf(puladaValue);
@@ -121,7 +136,13 @@ private static boolean YARDA = true;
     //genero los nuevos metodos de conversión
     //siguiendo la lógica de semáforo empleada en la edición del convertir original
     private String centimetrosAMetros(String cenimetroText, Boolean inversor){
+        if (cenimetroText.isEmpty()){
+            throw new NingunValorException();
+        }
         double puladaValue;
+        if (Double.parseDouble(cenimetroText)<1){
+            throw new NumeroMenorException();
+        }
         if (inversor){
             puladaValue = Double.parseDouble(cenimetroText) / 100;
             return String.valueOf(puladaValue);
@@ -132,7 +153,13 @@ private static boolean YARDA = true;
     }
 
     private String yardasAMetros(String yardaText, Boolean inversor){
+        if (yardaText.isEmpty()){
+            throw new NingunValorException();
+        }
         double puladaValue;
+        if (Double.parseDouble(yardaText)<1){
+            throw new NumeroMenorException();
+        }
         if (inversor){
             puladaValue = Double.parseDouble(yardaText) * 0.9144;
             return String.valueOf(puladaValue);
@@ -141,4 +168,25 @@ private static boolean YARDA = true;
 
         return String.valueOf(puladaValue);
     }
+
+    //sobreescribimos el guardar instancia para consevar los datos
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Guardamos los semaforos booleanos
+        outState.putBoolean("KEY_PULGADA", pulgada);
+        outState.putBoolean("KEY_CENTIMETRO", centimetro);
+        outState.putBoolean("KEY_YARDA", yarda);
+
+        // Guardamos los valores de los resultados
+        EditText etResultado = findViewById(R.id.editResultado);
+        EditText etResultadoMetros = findViewById(R.id.editResultadoM);
+        EditText etResultadoYarda = findViewById(R.id.editResultadoY);
+
+        outState.putString("KEY_RES_PULGADA", etResultado.getText().toString());
+        outState.putString("KEY_RES_METROS", etResultadoMetros.getText().toString());
+        outState.putString("KEY_RES_YARDA", etResultadoYarda.getText().toString());
+    }
+
 }
