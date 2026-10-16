@@ -17,7 +17,6 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirCm"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +113,6 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirCm"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirCm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/infoConversor" />
@@ -168,7 +166,6 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirPg"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirPg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/infoConversor" />

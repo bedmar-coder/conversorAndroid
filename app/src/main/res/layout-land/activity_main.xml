@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toStartOf="@+id/infoConversor2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/pedirPulgadas"
@@ -31,11 +32,12 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirPg"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirPg"
         app:layout_constraintEnd_toStartOf="@+id/pedirCM"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/infoConversor" />
+        app:layout_constraintTop_toBottomOf="@id/infoConversor"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <Button
         android:id="@+id/buttonInvertirPulg"
@@ -63,11 +65,12 @@
         android:ems="10"
         android:hint="@string/editTextHintResultado"
         android:inputType="numberDecimal"
-        android:textColor="@color/design_default_color_on_secondary"
         android:textColorLink="@color/black"
         app:layout_constraintEnd_toEndOf="@id/pedirPulgadas"
         app:layout_constraintStart_toStartOf="@id/pedirPulgadas"
-        app:layout_constraintTop_toBottomOf="@id/buttonConvertir" />
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertir"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <TextView
         android:id="@+id/infoConversor2"
@@ -92,11 +95,12 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirCm"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirCm"
         app:layout_constraintEnd_toStartOf="@+id/pedirY"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/pedirPulgadas"
-        app:layout_constraintTop_toBottomOf="@id/infoConversor2" />
+        app:layout_constraintTop_toBottomOf="@id/infoConversor2"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <Button
         android:id="@+id/buttonInvertirM"
@@ -126,7 +130,9 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="@id/pedirCM"
         app:layout_constraintStart_toStartOf="@id/pedirCM"
-        app:layout_constraintTop_toBottomOf="@id/buttonConvertirM" />
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirM"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <TextView
         android:id="@+id/infoConversor3"
@@ -151,11 +157,12 @@
         android:ems="10"
         android:hint="@string/textViewHintPedirCm"
         android:inputType="numberDecimal"
-        android:text="@string/textViewHintPedirY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/pedirCM"
-        app:layout_constraintTop_toBottomOf="@id/infoConversor3" />
+        app:layout_constraintTop_toBottomOf="@id/infoConversor3"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <Button
         android:id="@+id/buttonInvertirY"
@@ -185,7 +192,9 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="@id/pedirY"
         app:layout_constraintStart_toStartOf="@id/pedirY"
-        app:layout_constraintTop_toBottomOf="@id/buttonConvertirY" />
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirY"
+        android:textColor="@color/black"
+        android:textColorHint="#555555"/>
 
     <Button
         android:id="@+id/Ayuda"

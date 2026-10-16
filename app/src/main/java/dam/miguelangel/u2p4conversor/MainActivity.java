@@ -35,18 +35,46 @@ private boolean yarda = true;
     private void setUI(){
         EditText etPulgada = findViewById(R.id.pedirPulgadas);
         EditText etResultado = findViewById(R.id.editResultado);
+
         Button buttonConvertir = findViewById(R.id.buttonConvertir);
 
         //Añado mis nuevos botones
         EditText etMetro = findViewById(R.id.pedirCM);
         EditText etResultadoMetros = findViewById(R.id.editResultadoM);
+
         Button buttonConvertirMetros = findViewById(R.id.buttonConvertirM);
+
         EditText etYarda = findViewById(R.id.pedirY);
         EditText etResultadoYarda = findViewById(R.id.editResultadoY);
+
         Button buttonConvertirYarda = findViewById(R.id.buttonConvertirY);
         Button buttonInversor = findViewById(R.id.buttonInvertirPulg);
         Button buttonInversorMetros = findViewById(R.id.buttonInvertirM);
         Button buttonINversorYarda = findViewById(R.id.buttonInvertirY);
+
+
+        //necesité hacer el siguiente código para forzar en el hint
+        //mayor oscuridad y contraste ya que no se veia sobre el blanco
+        //e ignoraba mi xml si no
+        etPulgada.setHintTextColor(android.graphics.Color.DKGRAY);
+        etPulgada.setTextColor(android.graphics.Color.BLACK);
+
+        etMetro.setHintTextColor(android.graphics.Color.DKGRAY);
+        etMetro.setTextColor(android.graphics.Color.BLACK);
+
+        etYarda.setHintTextColor(android.graphics.Color.DKGRAY);
+        etYarda.setTextColor(android.graphics.Color.BLACK);
+
+        etResultado.setHintTextColor(android.graphics.Color.GRAY);
+        etResultado.setTextColor(android.graphics.Color.BLACK);
+
+        etResultadoMetros.setHintTextColor(android.graphics.Color.GRAY);
+        etResultadoMetros.setTextColor(android.graphics.Color.BLACK);
+
+        etResultadoYarda.setHintTextColor(android.graphics.Color.GRAY);
+        etResultadoYarda.setTextColor(android.graphics.Color.BLACK);
+
+
 
         //añado el de ayuda
         Button buttonAyuda = findViewById(R.id.Ayuda);
@@ -58,27 +86,28 @@ private boolean yarda = true;
             pulgada = !pulgada;
             if (pulgada){
                 //cambio el texto por lo nuevo que pido
-                etPulgada.setText(v.getContext().getString(R.string.textViewHintPedirPg));
+                //pero en hint para que desaparezca cuando escribe el usuario
+                etPulgada.setHint(v.getContext().getString(R.string.textViewHintPedirPg));
             } else {
-                etPulgada.setText(v.getContext().getString(R.string.textViewHintPedirCm));
+                etPulgada.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
             }
         });
 
         buttonInversorMetros.setOnClickListener(v -> {
             centimetro = !centimetro;
             if (centimetro){
-                etMetro.setText(v.getContext().getString(R.string.textViewHintPedirCm));
+                etMetro.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
             } else {
-                etMetro.setText(v.getContext().getString(R.string.textViewHintPedirM));
+                etMetro.setHint(v.getContext().getString(R.string.textViewHintPedirM));
             }
         });
 
         buttonINversorYarda.setOnClickListener(v -> {
             yarda = !yarda;
             if (yarda){
-                etYarda.setText(v.getContext().getString(R.string.textViewHintPedirY));
+                etYarda.setHint(v.getContext().getString(R.string.textViewHintPedirY));
             } else {
-                etYarda.setText(v.getContext().getString(R.string.textViewHintPedirM));
+                etYarda.setHint(v.getContext().getString(R.string.textViewHintPedirM));
             }
         });
 
