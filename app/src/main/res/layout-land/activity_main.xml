@@ -1,167 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@drawable/images">
+    android:background="@drawable/images"
+    tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/infoConversor"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:baselineAligned="false"
-        android:padding="16dp">
+        android:layout_marginTop="16dp"
+        android:text="@string/textViewInfoPg"
+        android:textColor="#0000FF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/infoConversor2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingEnd="8dp">
+    <EditText
+        android:id="@+id/pedirPulgadas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/textViewHintPedirPg"
+        android:inputType="numberDecimal"
+        android:text="@string/textViewHintPedirPg"
+        app:layout_constraintEnd_toStartOf="@+id/pedirCM"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoConversor" />
 
-            <TextView
-                android:id="@+id/infoConversor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewInfoPg"
-                android:textColor="#0000FF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <Button
+        android:id="@+id/buttonInvertirPulg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonInvertir"
+        app:layout_constraintStart_toStartOf="@id/pedirPulgadas"
+        app:layout_constraintTop_toBottomOf="@id/pedirPulgadas" />
 
-            <EditText
-                android:id="@+id/pedirPulgadas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/textViewHintPedirPg"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
+    <Button
+        android:id="@+id/buttonConvertir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonConvertir"
+        app:layout_constraintEnd_toEndOf="@id/pedirPulgadas"
+        app:layout_constraintTop_toBottomOf="@id/pedirPulgadas" />
 
-            <Button
-                android:id="@+id/buttonInvertirPulg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/buttonInvertir" />
+    <EditText
+        android:id="@+id/editResultado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/editTextHintResultado"
+        android:inputType="numberDecimal"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorLink="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/pedirPulgadas"
+        app:layout_constraintStart_toStartOf="@id/pedirPulgadas"
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertir" />
 
-            <Button
-                android:id="@+id/buttonConvertir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/buttonConvertir" />
+    <TextView
+        android:id="@+id/infoConversor2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/textViewInfoM"
+        android:textColor="#0000FF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/infoConversor3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/infoConversor"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editResultado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/editTextHintResultado"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
-        </LinearLayout>
+    <EditText
+        android:id="@+id/pedirCM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/textViewHintPedirCm"
+        android:inputType="numberDecimal"
+        android:text="@string/textViewHintPedirCm"
+        app:layout_constraintEnd_toStartOf="@+id/pedirY"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pedirPulgadas"
+        app:layout_constraintTop_toBottomOf="@id/infoConversor2" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp">
+    <Button
+        android:id="@+id/buttonInvertirM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonInvertir"
+        app:layout_constraintStart_toStartOf="@id/pedirCM"
+        app:layout_constraintTop_toBottomOf="@id/pedirCM" />
 
-            <TextView
-                android:id="@+id/infoConversor2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewInfoM"
-                android:textColor="#0000FF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <Button
+        android:id="@+id/buttonConvertirM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonConvertir"
+        app:layout_constraintEnd_toEndOf="@id/pedirCM"
+        app:layout_constraintTop_toBottomOf="@id/pedirCM" />
 
-            <EditText
-                android:id="@+id/pedirCM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/textViewHintPedirCm"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
+    <EditText
+        android:id="@+id/editResultadoM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/editTextHintResultado"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@id/pedirCM"
+        app:layout_constraintStart_toStartOf="@id/pedirCM"
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirM" />
 
-            <Button
-                android:id="@+id/buttonInvertirM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/buttonInvertir" />
+    <TextView
+        android:id="@+id/infoConversor3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/textViewInfoY"
+        android:textColor="#0000FF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/infoConversor2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/buttonConvertirM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/buttonConvertir" />
+    <EditText
+        android:id="@+id/pedirY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/textViewHintPedirCm"
+        android:inputType="numberDecimal"
+        android:text="@string/textViewHintPedirY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pedirCM"
+        app:layout_constraintTop_toBottomOf="@id/infoConversor3" />
 
-            <EditText
-                android:id="@+id/editResultadoM"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/editTextHintResultado"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
-        </LinearLayout>
+    <Button
+        android:id="@+id/buttonInvertirY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonInvertir"
+        app:layout_constraintStart_toStartOf="@id/pedirY"
+        app:layout_constraintTop_toBottomOf="@id/pedirY" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingStart="8dp">
+    <Button
+        android:id="@+id/buttonConvertirY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonConvertir"
+        app:layout_constraintEnd_toEndOf="@id/pedirY"
+        app:layout_constraintTop_toBottomOf="@id/pedirY" />
 
-            <TextView
-                android:id="@+id/infoConversor3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textViewInfoY"
-                android:textColor="#0000FF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <EditText
+        android:id="@+id/editResultadoY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/editTextHintResultado"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@id/pedirY"
+        app:layout_constraintStart_toStartOf="@id/pedirY"
+        app:layout_constraintTop_toBottomOf="@id/buttonConvertirY" />
 
-            <EditText
-                android:id="@+id/pedirY"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/textViewHintPedirCm"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
+    <Button
+        android:id="@+id/Ayuda"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/buttonAyuda"
+        android:textColorLink="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-            <Button
-                android:id="@+id/buttonInvertirY"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/buttonInvertir" />
-
-            <Button
-                android:id="@+id/buttonConvertirY"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/buttonConvertir" />
-
-            <EditText
-                android:id="@+id/editResultadoY"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/editTextHintResultado"
-                android:inputType="numberDecimal"
-                android:textAlignment="center" />
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

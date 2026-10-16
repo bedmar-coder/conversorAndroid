@@ -10,4 +10,5 @@
     <string name="buttonConvertir">Convertir</string>
     <string name="buttonInvertir">Invertir</string>
     <string name="editTextHintResultado">Resultado</string>
+    <string name="buttonAyuda">\?</string>
 </resources>

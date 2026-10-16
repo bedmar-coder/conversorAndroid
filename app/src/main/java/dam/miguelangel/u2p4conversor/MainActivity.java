@@ -48,6 +48,10 @@ private boolean yarda = true;
         Button buttonInversorMetros = findViewById(R.id.buttonInvertirM);
         Button buttonINversorYarda = findViewById(R.id.buttonInvertirY);
 
+        //añado el de ayuda
+        Button buttonAyuda = findViewById(R.id.Ayuda);
+
+
 
         //añado listener para los botones de inversión
         buttonInversor.setOnClickListener(v -> {
@@ -108,6 +112,11 @@ private boolean yarda = true;
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
+        });
+
+        //añado el de ayuda
+        buttonAyuda.setOnClickListener(v -> {
+
         });
     }
 
