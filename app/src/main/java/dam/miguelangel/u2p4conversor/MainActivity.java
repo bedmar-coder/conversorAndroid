@@ -19,6 +19,9 @@ private boolean pulgada = true;
 private boolean centimetro = true;
 private boolean yarda = true;
 
+//añadida avriable para controlar el redondeo
+    private static final String REDONDEAR = "%.2f";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,13 +165,15 @@ private boolean yarda = true;
         if (Double.parseDouble(pulgadaText)<1){
             throw new NumeroMenorException();
         }
+        //Corregida redundancia de returns que había en las ramas previas
         if (inversor){
             puladaValue = Double.parseDouble(pulgadaText) * 2.54;
-            return String.valueOf(puladaValue);
+        } else {
+            puladaValue = Double.parseDouble(pulgadaText) / 2.54;
         }
-        puladaValue = Double.parseDouble(pulgadaText) / 2.54;
 
-        return String.valueOf(puladaValue);
+
+        return String.format(REDONDEAR,puladaValue);
     }
 
 
@@ -185,11 +190,13 @@ private boolean yarda = true;
         }
         if (inversor){
             puladaValue = Double.parseDouble(cenimetroText) / 100;
-            return String.valueOf(puladaValue);
-        }
-        puladaValue = Double.parseDouble(cenimetroText) * 100;
 
-        return String.valueOf(puladaValue);
+        } else {
+            puladaValue = Double.parseDouble(cenimetroText) * 100;
+        }
+
+
+        return String.format(REDONDEAR, puladaValue);
     }
 
     private String yardasAMetros(String yardaText, Boolean inversor){
@@ -202,11 +209,13 @@ private boolean yarda = true;
         }
         if (inversor){
             puladaValue = Double.parseDouble(yardaText) * 0.9144;
-            return String.valueOf(puladaValue);
-        }
-        puladaValue = Double.parseDouble(yardaText)  / 0.9144 ;
 
-        return String.valueOf(puladaValue);
+        } else {
+            puladaValue = Double.parseDouble(yardaText)  / 0.9144 ;
+        }
+
+
+        return String.format(REDONDEAR, puladaValue);
     }
 
     //sobreescribimos el guardar instancia para consevar los datos
