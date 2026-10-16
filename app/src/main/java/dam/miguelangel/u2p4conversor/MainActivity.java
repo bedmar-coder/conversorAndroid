@@ -14,6 +14,40 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    //añadimos el tag de los log
+    private static final String DEBUG_TAG = "LogsAndroid-1";
+
+    //sobreescribiumos las clases para poner los logs
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(DEBUG_TAG, "onPause");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(DEBUG_TAG, "onRestart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(DEBUG_TAG, "onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(DEBUG_TAG, "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(DEBUG_TAG, "onStop");
+    }
+
     //creo estas variables de instancia para controlar los inversores
 private boolean pulgada = true;
 private boolean centimetro = true;
@@ -25,6 +59,7 @@ private boolean yarda = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(DEBUG_TAG, "onCreate");
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -87,6 +122,7 @@ private boolean yarda = true;
 
         //añado listener para los botones de inversión
         buttonInversor.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonInversor.getText().toString());
             pulgada = !pulgada;
             if (pulgada){
                 //cambio el texto por lo nuevo que pido
@@ -98,6 +134,7 @@ private boolean yarda = true;
         });
 
         buttonInversorMetros.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonInversorMetros.getText().toString());
             centimetro = !centimetro;
             if (centimetro){
                 etMetro.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
@@ -107,6 +144,7 @@ private boolean yarda = true;
         });
 
         buttonINversorYarda.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonINversorYarda.getText().toString());
             yarda = !yarda;
             if (yarda){
                 etYarda.setHint(v.getContext().getString(R.string.textViewHintPedirY));
@@ -116,6 +154,7 @@ private boolean yarda = true;
         });
 
         buttonConvertir.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertir.getText().toString());
             try {
                 etResultado.setText(pulgadasACentimetros(etPulgada.getText().toString(), pulgada));
 
@@ -128,6 +167,7 @@ private boolean yarda = true;
 
         //añado los nuevos botones de convertir
         buttonConvertirMetros.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertirMetros.getText().toString());
            try {
                etResultadoMetros.setText(centimetrosAMetros(etMetro.getText().toString(), centimetro));
            } catch (NingunValorException | NumeroMenorException e){
@@ -138,6 +178,7 @@ private boolean yarda = true;
         });
 
         buttonConvertirYarda.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertirYarda.getText().toString());
             try {
                 etResultadoYarda.setText(yardasAMetros(etYarda.getText().toString(), yarda));
             } catch (NingunValorException | NumeroMenorException e){
@@ -149,6 +190,7 @@ private boolean yarda = true;
 
         //añado el de ayuda
         buttonAyuda.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonAyuda.getText().toString());
             //lanzamos la activity de ayuda
             startActivity(new Intent(MainActivity.this, AYuda.class));
         });
@@ -222,6 +264,7 @@ private boolean yarda = true;
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.i(DEBUG_TAG, "onSaveInstance");
 
         // Guardamos los semaforos booleanos
         outState.putBoolean("KEY_PULGADA", pulgada);
