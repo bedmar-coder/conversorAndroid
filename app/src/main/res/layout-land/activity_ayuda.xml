@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".AYuda">
+
+    <TextView
+        android:id="@+id/tvAyudaTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/ayudaTitulo"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUsoTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/ayudaUsoTitulo"
+        android:textColor="#0000FF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/tvErroresTitulo"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAyudaTitulo" />
+
+    <TextView
+        android:id="@+id/tvUsoTexto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/ayudaUsoTexto"
+        android:textColor="#333333"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@id/tvUsoTitulo"
+        app:layout_constraintStart_toStartOf="@id/tvUsoTitulo"
+        app:layout_constraintTop_toBottomOf="@id/tvUsoTitulo" />
+
+    <TextView
+        android:id="@+id/tvErroresTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/ayudaErroresTitulo"
+        android:textColor="#D32F2F"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvUsoTitulo"
+        app:layout_constraintTop_toBottomOf="@id/tvAyudaTitulo" />
+
+    <TextView
+        android:id="@+id/tvErroresTexto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/ayudaErroresTexto"
+        android:textColor="#333333"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@id/tvErroresTitulo"
+        app:layout_constraintStart_toStartOf="@id/tvErroresTitulo"
+        app:layout_constraintTop_toBottomOf="@id/tvErroresTitulo" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/buttonVolver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

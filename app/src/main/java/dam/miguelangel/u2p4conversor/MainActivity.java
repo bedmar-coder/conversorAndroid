@@ -1,5 +1,6 @@
 package dam.miguelangel.u2p4conversor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -145,7 +146,8 @@ private boolean yarda = true;
 
         //añado el de ayuda
         buttonAyuda.setOnClickListener(v -> {
-
+            //lanzamos la activity de ayuda
+            startActivity(new Intent(MainActivity.this, AYuda.class));
         });
     }
 

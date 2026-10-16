@@ -11,4 +11,18 @@
     <string name="buttonInvertir">Invertir</string>
     <string name="editTextHintResultado">Resultado</string>
     <string name="buttonAyuda">\?</string>
+    <string name="ayudaTitulo">Guía de Uso y Ayuda</string>
+    <string name="ayudaUsoTitulo">1. ¿Cómo utilizar la aplicación?</string>
+    <string name="ayudaUsoTexto">
+        -Selecciona el conversor deseado (Pulgadas, Metros o Yardas).\n
+        -Introduce un valor en la casilla de texto.\n
+        -Haz clic en "Convertir" para obtener el resultado.\n
+        -Pulsa en "Invertir" para cambiar la dirección de la conversión.
+    </string>
+    <string name="ayudaErroresTitulo">Mensajes de Error y Excepciones</string>
+    <string name="ayudaErroresTexto">
+        -NingunValorException: Ocurre si pulsas "Convertir" dejando el campo de texto vacío.\n\n
+        -NumeroMenorException: Ocurre si introduces un número inferior a 1, ya que solo se permiten valores de 1 en adelante.
+    </string>
+    <string name="buttonVolver">Conversor</string>
 </resources>
