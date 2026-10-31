@@ -12,12 +12,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+/**
+ * Main screen: three unit converters (inches/cm, cm/m and yards/m),
+ * each with a button to swap the direction of the conversion.
+ */
 public class MainActivity extends AppCompatActivity {
 
-    //añadimos el tag de los log
+    // Tag used for the logs
     private static final String DEBUG_TAG = "LogsAndroid-1";
 
-    //sobreescribiumos las clases para poner los logs
+    // Override the lifecycle methods to log them
     @Override
     protected void onPause() {
         super.onPause();
@@ -48,14 +52,19 @@ public class MainActivity extends AppCompatActivity {
         Log.i(DEBUG_TAG, "onStop");
     }
 
-    //creo estas variables de instancia para controlar los inversores
-private boolean pulgada = true;
-private boolean centimetro = true;
-private boolean yarda = true;
+    // Instance flags that control the direction of each converter
+    private boolean inch = true;
+    private boolean centimetre = true;
+    private boolean yard = true;
 
-//añadida avriable para controlar el redondeo
-    private static final String REDONDEAR = "%.2f";
+    // Format used to round the results
+    private static final String ROUND = "%.2f";
 
+    /**
+     * Sets up the screen and its buttons.
+     *
+     * @param savedInstanceState the saved state, if the activity is being recreated
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,214 +80,239 @@ private boolean yarda = true;
         setUI();
     }
 
-    private void setUI(){
-        EditText etPulgada = findViewById(R.id.pedirPulgadas);
-        EditText etResultado = findViewById(R.id.editResultado);
+    /**
+     * Finds the views and attaches a click listener to every button.
+     */
+    private void setUI() {
+        EditText etInch = findViewById(R.id.pedirPulgadas);
+        EditText etResult = findViewById(R.id.editResultado);
 
-        Button buttonConvertir = findViewById(R.id.buttonConvertir);
+        Button buttonConvert = findViewById(R.id.buttonConvertir);
 
-        //Añado mis nuevos botones
-        EditText etMetro = findViewById(R.id.pedirCM);
-        EditText etResultadoMetros = findViewById(R.id.editResultadoM);
+        // My new buttons
+        EditText etMetre = findViewById(R.id.pedirCM);
+        EditText etResultMetres = findViewById(R.id.editResultadoM);
 
-        Button buttonConvertirMetros = findViewById(R.id.buttonConvertirM);
+        Button buttonConvertMetres = findViewById(R.id.buttonConvertirM);
 
-        EditText etYarda = findViewById(R.id.pedirY);
-        EditText etResultadoYarda = findViewById(R.id.editResultadoY);
+        EditText etYard = findViewById(R.id.pedirY);
+        EditText etResultYard = findViewById(R.id.editResultadoY);
 
-        Button buttonConvertirYarda = findViewById(R.id.buttonConvertirY);
-        Button buttonInversor = findViewById(R.id.buttonInvertirPulg);
-        Button buttonInversorMetros = findViewById(R.id.buttonInvertirM);
-        Button buttonINversorYarda = findViewById(R.id.buttonInvertirY);
-
-
-        //necesité hacer el siguiente código para forzar en el hint
-        //mayor oscuridad y contraste ya que no se veia sobre el blanco
-        //e ignoraba mi xml si no
-        etPulgada.setHintTextColor(android.graphics.Color.DKGRAY);
-        etPulgada.setTextColor(android.graphics.Color.BLACK);
-
-        etMetro.setHintTextColor(android.graphics.Color.DKGRAY);
-        etMetro.setTextColor(android.graphics.Color.BLACK);
-
-        etYarda.setHintTextColor(android.graphics.Color.DKGRAY);
-        etYarda.setTextColor(android.graphics.Color.BLACK);
-
-        etResultado.setHintTextColor(android.graphics.Color.GRAY);
-        etResultado.setTextColor(android.graphics.Color.BLACK);
-
-        etResultadoMetros.setHintTextColor(android.graphics.Color.GRAY);
-        etResultadoMetros.setTextColor(android.graphics.Color.BLACK);
-
-        etResultadoYarda.setHintTextColor(android.graphics.Color.GRAY);
-        etResultadoYarda.setTextColor(android.graphics.Color.BLACK);
+        Button buttonConvertYard = findViewById(R.id.buttonConvertirY);
+        Button buttonSwap = findViewById(R.id.buttonInvertirPulg);
+        Button buttonSwapMetres = findViewById(R.id.buttonInvertirM);
+        Button buttonSwapYard = findViewById(R.id.buttonInvertirY);
 
 
+        // I had to add the following code to force a darker hint with more
+        // contrast, because it couldn't be seen on the white background
+        // and my XML was being ignored otherwise
+        etInch.setHintTextColor(android.graphics.Color.DKGRAY);
+        etInch.setTextColor(android.graphics.Color.BLACK);
 
-        //añado el de ayuda
-        Button buttonAyuda = findViewById(R.id.Ayuda);
+        etMetre.setHintTextColor(android.graphics.Color.DKGRAY);
+        etMetre.setTextColor(android.graphics.Color.BLACK);
+
+        etYard.setHintTextColor(android.graphics.Color.DKGRAY);
+        etYard.setTextColor(android.graphics.Color.BLACK);
+
+        etResult.setHintTextColor(android.graphics.Color.GRAY);
+        etResult.setTextColor(android.graphics.Color.BLACK);
+
+        etResultMetres.setHintTextColor(android.graphics.Color.GRAY);
+        etResultMetres.setTextColor(android.graphics.Color.BLACK);
+
+        etResultYard.setHintTextColor(android.graphics.Color.GRAY);
+        etResultYard.setTextColor(android.graphics.Color.BLACK);
 
 
+        // Add the help button
+        Button buttonHelp = findViewById(R.id.Ayuda);
 
-        //añado listener para los botones de inversión
-        buttonInversor.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonInversor.getText().toString());
-            pulgada = !pulgada;
-            if (pulgada){
-                //cambio el texto por lo nuevo que pido
-                //pero en hint para que desaparezca cuando escribe el usuario
-                etPulgada.setHint(v.getContext().getString(R.string.textViewHintPedirPg));
+
+        // Add listeners for the swap buttons
+        buttonSwap.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonSwap.getText().toString());
+            inch = !inch;
+            if (inch) {
+                // Change the text to what I'm now asking for,
+                // but as a hint so it disappears when the user types
+                etInch.setHint(v.getContext().getString(R.string.textViewHintPedirPg));
             } else {
-                etPulgada.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
+                etInch.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
             }
         });
 
-        buttonInversorMetros.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonInversorMetros.getText().toString());
-            centimetro = !centimetro;
-            if (centimetro){
-                etMetro.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
+        buttonSwapMetres.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonSwapMetres.getText().toString());
+            centimetre = !centimetre;
+            if (centimetre) {
+                etMetre.setHint(v.getContext().getString(R.string.textViewHintPedirCm));
             } else {
-                etMetro.setHint(v.getContext().getString(R.string.textViewHintPedirM));
+                etMetre.setHint(v.getContext().getString(R.string.textViewHintPedirM));
             }
         });
 
-        buttonINversorYarda.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonINversorYarda.getText().toString());
-            yarda = !yarda;
-            if (yarda){
-                etYarda.setHint(v.getContext().getString(R.string.textViewHintPedirY));
+        buttonSwapYard.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonSwapYard.getText().toString());
+            yard = !yard;
+            if (yard) {
+                etYard.setHint(v.getContext().getString(R.string.textViewHintPedirY));
             } else {
-                etYarda.setHint(v.getContext().getString(R.string.textViewHintPedirM));
+                etYard.setHint(v.getContext().getString(R.string.textViewHintPedirM));
             }
         });
 
-        buttonConvertir.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertir.getText().toString());
+        buttonConvert.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonConvert.getText().toString());
             try {
-                etResultado.setText(pulgadasACentimetros(etPulgada.getText().toString(), pulgada));
+                etResult.setText(inchesToCentimetres(etInch.getText().toString(), inch));
 
-            } catch (NingunValorException | NumeroMenorException e){
+            } catch (NoValueException | NumberTooSmallException e) {
                 Log.e("LogsConversor", e.getMessage());
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
         });
 
-        //añado los nuevos botones de convertir
-        buttonConvertirMetros.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertirMetros.getText().toString());
-           try {
-               etResultadoMetros.setText(centimetrosAMetros(etMetro.getText().toString(), centimetro));
-           } catch (NingunValorException | NumeroMenorException e){
-               Log.e("LogsConversor", e.getMessage());
-           } catch (Exception e) {
-               Log.e("LogsConversor", e.getMessage());
-           }
-        });
-
-        buttonConvertirYarda.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonConvertirYarda.getText().toString());
+        // Add the new convert buttons
+        buttonConvertMetres.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonConvertMetres.getText().toString());
             try {
-                etResultadoYarda.setText(yardasAMetros(etYarda.getText().toString(), yarda));
-            } catch (NingunValorException | NumeroMenorException e){
+                etResultMetres.setText(centimetresToMetres(etMetre.getText().toString(), centimetre));
+            } catch (NoValueException | NumberTooSmallException e) {
                 Log.e("LogsConversor", e.getMessage());
             } catch (Exception e) {
                 Log.e("LogsConversor", e.getMessage());
             }
         });
 
-        //añado el de ayuda
-        buttonAyuda.setOnClickListener(v -> {
-            Log.i(DEBUG_TAG, "Se ha pulsado el botón " + buttonAyuda.getText().toString());
-            //lanzamos la activity de ayuda
-            startActivity(new Intent(MainActivity.this, AYuda.class));
+        buttonConvertYard.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonConvertYard.getText().toString());
+            try {
+                etResultYard.setText(yardsToMetres(etYard.getText().toString(), yard));
+            } catch (NoValueException | NumberTooSmallException e) {
+                Log.e("LogsConversor", e.getMessage());
+            } catch (Exception e) {
+                Log.e("LogsConversor", e.getMessage());
+            }
+        });
+
+        // Help button
+        buttonHelp.setOnClickListener(v -> {
+            Log.i(DEBUG_TAG, "Button pressed: " + buttonHelp.getText().toString());
+            // Open the help activity
+            startActivity(new Intent(MainActivity.this, HelpActivity.class));
         });
     }
 
-    private String pulgadasACentimetros(String pulgadaText, Boolean inversor){
-        //si el valor está vacio lanzo mi excepción
-        if (pulgadaText.isEmpty()){
-            throw new NingunValorException();
+    /**
+     * Converts inches to centimetres, or the other way round.
+     *
+     * @param inchText the value typed by the user
+     * @param swap true to go from inches to cm, false to go from cm to inches
+     * @return the result rounded to two decimals
+     */
+    private String inchesToCentimetres(String inchText, Boolean swap) {
+        // If the value is empty, throw my exception
+        if (inchText.isEmpty()) {
+            throw new NoValueException();
         }
-        double puladaValue;
+        double inchValue;
 
-        //ahora compruebo el número sea igual o mayor a 1
-        if (Double.parseDouble(pulgadaText)<1){
-            throw new NumeroMenorException();
+        // Now check the number is 1 or greater
+        if (Double.parseDouble(inchText) < 1) {
+            throw new NumberTooSmallException();
         }
-        //Corregida redundancia de returns que había en las ramas previas
-        if (inversor){
-            puladaValue = Double.parseDouble(pulgadaText) * 2.54;
+        // Removed the redundant returns that the previous branches had
+        if (swap) {
+            inchValue = Double.parseDouble(inchText) * 2.54;
         } else {
-            puladaValue = Double.parseDouble(pulgadaText) / 2.54;
+            inchValue = Double.parseDouble(inchText) / 2.54;
         }
 
 
-        return String.format(REDONDEAR,puladaValue);
+        return String.format(ROUND, inchValue);
     }
 
 
+    // New conversion methods, following the same flag logic used in the original converter
 
-    //genero los nuevos metodos de conversión
-    //siguiendo la lógica de semáforo empleada en la edición del convertir original
-    private String centimetrosAMetros(String cenimetroText, Boolean inversor){
-        if (cenimetroText.isEmpty()){
-            throw new NingunValorException();
+    /**
+     * Converts centimetres to metres, or the other way round.
+     *
+     * @param centimetreText the value typed by the user
+     * @param swap true to go from cm to m, false to go from m to cm
+     * @return the result rounded to two decimals
+     */
+    private String centimetresToMetres(String centimetreText, Boolean swap) {
+        if (centimetreText.isEmpty()) {
+            throw new NoValueException();
         }
-        double puladaValue;
-        if (Double.parseDouble(cenimetroText)<1){
-            throw new NumeroMenorException();
+        double value;
+        if (Double.parseDouble(centimetreText) < 1) {
+            throw new NumberTooSmallException();
         }
-        if (inversor){
-            puladaValue = Double.parseDouble(cenimetroText) / 100;
+        if (swap) {
+            value = Double.parseDouble(centimetreText) / 100;
 
         } else {
-            puladaValue = Double.parseDouble(cenimetroText) * 100;
+            value = Double.parseDouble(centimetreText) * 100;
         }
 
 
-        return String.format(REDONDEAR, puladaValue);
+        return String.format(ROUND, value);
     }
 
-    private String yardasAMetros(String yardaText, Boolean inversor){
-        if (yardaText.isEmpty()){
-            throw new NingunValorException();
+    /**
+     * Converts yards to metres, or the other way round.
+     *
+     * @param yardText the value typed by the user
+     * @param swap true to go from yards to m, false to go from m to yards
+     * @return the result rounded to two decimals
+     */
+    private String yardsToMetres(String yardText, Boolean swap) {
+        if (yardText.isEmpty()) {
+            throw new NoValueException();
         }
-        double puladaValue;
-        if (Double.parseDouble(yardaText)<1){
-            throw new NumeroMenorException();
+        double value;
+        if (Double.parseDouble(yardText) < 1) {
+            throw new NumberTooSmallException();
         }
-        if (inversor){
-            puladaValue = Double.parseDouble(yardaText) * 0.9144;
+        if (swap) {
+            value = Double.parseDouble(yardText) * 0.9144;
 
         } else {
-            puladaValue = Double.parseDouble(yardaText)  / 0.9144 ;
+            value = Double.parseDouble(yardText) / 0.9144;
         }
 
 
-        return String.format(REDONDEAR, puladaValue);
+        return String.format(ROUND, value);
     }
 
-    //sobreescribimos el guardar instancia para consevar los datos
+    /**
+     * Saves the converters' direction and the results so they survive a screen rotation.
+     *
+     * @param outState the bundle where the state is stored
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.i(DEBUG_TAG, "onSaveInstance");
 
-        // Guardamos los semaforos booleanos
-        outState.putBoolean("KEY_PULGADA", pulgada);
-        outState.putBoolean("KEY_CENTIMETRO", centimetro);
-        outState.putBoolean("KEY_YARDA", yarda);
+        // Save the boolean flags
+        outState.putBoolean("KEY_PULGADA", inch);
+        outState.putBoolean("KEY_CENTIMETRO", centimetre);
+        outState.putBoolean("KEY_YARDA", yard);
 
-        // Guardamos los valores de los resultados
-        EditText etResultado = findViewById(R.id.editResultado);
-        EditText etResultadoMetros = findViewById(R.id.editResultadoM);
-        EditText etResultadoYarda = findViewById(R.id.editResultadoY);
+        // Save the result values
+        EditText etResult = findViewById(R.id.editResultado);
+        EditText etResultMetres = findViewById(R.id.editResultadoM);
+        EditText etResultYard = findViewById(R.id.editResultadoY);
 
-        outState.putString("KEY_RES_PULGADA", etResultado.getText().toString());
-        outState.putString("KEY_RES_METROS", etResultadoMetros.getText().toString());
-        outState.putString("KEY_RES_YARDA", etResultadoYarda.getText().toString());
+        outState.putString("KEY_RES_PULGADA", etResult.getText().toString());
+        outState.putString("KEY_RES_METROS", etResultMetres.getText().toString());
+        outState.putString("KEY_RES_YARDA", etResultYard.getText().toString());
     }
 
 }

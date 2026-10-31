@@ -1,28 +1,28 @@
 <resources>
     <string name="app_name">U2P4Conversor</string>
-    <string name="textViewInfoPg">Conversor de pulgadas a centímetros</string>
-    <string name="textViewInfoM">Conversor de centímetros a metros</string>
-    <string name="textViewInfoY">Conversor de yardas a metros</string>
-    <string name="textViewHintPedirPg">Introduce las pulgadas</string>
-    <string name="textViewHintPedirCm">Introduce los centímetros</string>
-    <string name="textViewHintPedirM">Introduce los metros</string>
-    <string name="textViewHintPedirY">Introduce los yardas</string>
-    <string name="buttonConvertir">Convertir</string>
-    <string name="buttonInvertir">Invertir</string>
-    <string name="editTextHintResultado">Resultado</string>
+    <string name="textViewInfoPg">Inches to centimetres converter</string>
+    <string name="textViewInfoM">Centimetres to metres converter</string>
+    <string name="textViewInfoY">Yards to metres converter</string>
+    <string name="textViewHintPedirPg">Enter the inches</string>
+    <string name="textViewHintPedirCm">Enter the centimetres</string>
+    <string name="textViewHintPedirM">Enter the metres</string>
+    <string name="textViewHintPedirY">Enter the yards</string>
+    <string name="buttonConvertir">Convert</string>
+    <string name="buttonInvertir">Swap</string>
+    <string name="editTextHintResultado">Result</string>
     <string name="buttonAyuda">\?</string>
-    <string name="ayudaTitulo">Guía de Uso y Ayuda</string>
-    <string name="ayudaUsoTitulo">1. ¿Cómo utilizar la aplicación?</string>
+    <string name="ayudaTitulo">User Guide and Help</string>
+    <string name="ayudaUsoTitulo">1. How do I use the app?</string>
     <string name="ayudaUsoTexto">
-        -Selecciona el conversor deseado (Pulgadas, Metros o Yardas).\n
-        -Introduce un valor en la casilla de texto.\n
-        -Haz clic en "Convertir" para obtener el resultado.\n
-        -Pulsa en "Invertir" para cambiar la dirección de la conversión.
+        -Choose the converter you want (Inches, Metres or Yards).\n
+        -Enter a value in the text box.\n
+        -Tap "Convert" to get the result.\n
+        -Tap "Swap" to change the direction of the conversion.
     </string>
-    <string name="ayudaErroresTitulo">Mensajes de Error y Excepciones</string>
+    <string name="ayudaErroresTitulo">Error Messages and Exceptions</string>
     <string name="ayudaErroresTexto">
-        -NingunValorException: Ocurre si pulsas "Convertir" dejando el campo de texto vacío.\n\n
-        -NumeroMenorException: Ocurre si introduces un número inferior a 1, ya que solo se permiten valores de 1 en adelante.
+        -NoValueException: happens if you tap "Convert" while the text field is empty.\n\n
+        -NumberTooSmallException: happens if you enter a number lower than 1, since only values from 1 upwards are allowed.
     </string>
-    <string name="buttonVolver">Conversor</string>
+    <string name="buttonVolver">Converter</string>
 </resources>

@@ -10,12 +10,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class AYuda extends AppCompatActivity {
+/**
+ * Help screen that explains how to use the converter and what the errors mean.
+ */
+public class HelpActivity extends AppCompatActivity {
 
-    //añadimos el tag de los log
+    // Tag used for the logs
     private static final String DEBUG_TAG = "LogsAndroid-2";
 
-    //sobreescribiumos las clases para poner los logs
+    // Override the lifecycle methods to log them
     @Override
     protected void onPause() {
         super.onPause();
@@ -46,6 +49,11 @@ public class AYuda extends AppCompatActivity {
         Log.i(DEBUG_TAG, "onStop");
     }
 
+    /**
+     * Sets up the help screen.
+     *
+     * @param savedInstanceState the saved state, if the activity is being recreated
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +69,16 @@ public class AYuda extends AppCompatActivity {
         setUI();
     }
 
-    //creamos el setui de la activity de ayuda
-    private void setUI(){
+    /**
+     * Sets up the help screen's button.
+     */
+    private void setUI() {
 
-        //localizamos el botón
-        Button volverConversor = findViewById(R.id.btnVolver);
+        // Find the button
+        Button backToConverter = findViewById(R.id.btnVolver);
 
-        //le damos funcionalidad con el listener de click
-        volverConversor.setOnClickListener(v -> finish());
-        //con el finish acbamos la activity para no crear copias innecesarias encima
+        // Give it something to do with a click listener
+        backToConverter.setOnClickListener(v -> finish());
+        // finish() closes this activity so we don't stack unnecessary copies on top
     }
 }

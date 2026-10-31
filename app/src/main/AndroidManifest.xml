@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AYuda"
+            android:name=".HelpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
